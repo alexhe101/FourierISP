@@ -1,0 +1,43 @@
+name: FourierISP
+model_type: FcolorDualModel
+scale: 1
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+
+datasets:
+  test_1:
+    name: ZRRTest
+    type: RAWDualImageDataset #PairedImageDataset
+    dataroot_gt: /path/ZRRdataset/test/canon
+    dataroot_lq: /path/ZRRdataset/test/huawei_raw
+
+    io_backend:
+      type: disk
+
+network_g:
+  type: FourierISP
+  wf: 24
+  in_chn: 3
+  depth: 4
+  relu_slope: 0.2
+
+# path
+path:
+  pretrain_network_g: /path/experiments/pretrained_models/toarxiv/model.pth
+  strict_load_g: true
+  param_key_g: params_ema
+
+# validation settings
+val:
+  save_img: true
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+      test_y_channel: false
