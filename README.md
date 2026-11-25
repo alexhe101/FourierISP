@@ -16,6 +16,8 @@ Xuanhua He\*, Tao Hu\*, Guoli Wang, Zejin Wang, Run Wang, Qian Zhang, Keyu Yan, 
 
 </div>
 
+[![Original ZRR teaser — Figure 1](https://arxiv.org/html/2401.02161v1/x1.png)](https://arxiv.org/pdf/2401.02161v1#page=1)
+
 ![FourierISP conceptual architecture](docs/assets/architecture.svg)
 
 ## Overview
@@ -39,7 +41,41 @@ The numbers below are from Table 1 of the [AAAI 2024 paper](https://arxiv.org/ht
 | ZRR (aligned GT) | 23.93 | 0.8744 | 0.9461 | 0.1240 |
 | MAI (one epoch of fine-tuning) | 24.99 | 0.8820 | 0.9594 | 0.0850 |
 
-See the paper for baseline comparisons, qualitative images, and evaluation details.
+### Qualitative comparisons (original paper)
+
+[![ZRR texture comparison — Figure 5](https://arxiv.org/html/2401.02161v1/x5.png)](https://arxiv.org/pdf/2401.02161v1#page=5)
+
+[![ZRR colors and histograms — Figure 6](https://arxiv.org/html/2401.02161v1/x6.png)](https://arxiv.org/pdf/2401.02161v1#page=6)
+
+[![Amplitude and phase features — Figure 7](https://arxiv.org/html/2401.02161v1/x7.png)](https://arxiv.org/pdf/2401.02161v1#page=6)
+
+[![MAI transfer — Figure 8](https://arxiv.org/html/2401.02161v1/x8.png)](https://arxiv.org/pdf/2401.02161v1#page=7)
+
+Source: He et al., AAAI 2024, Figures 1 and 5–8, [paper](https://arxiv.org/pdf/2401.02161v1). These are original published panels, not new outputs from the modern implementation. See the [project website](https://alexhe101.github.io/FourierISP/#results) or the paper for all comparisons.
+
+### Baseline comparison (Table 1, selected columns)
+
+| Method | ZRR PSNR ↑ | ZRR SSIM ↑ | ZRR MS-SSIM ↑ | ZRR LPIPS ↓ | Aligned ZRR PSNR ↑ | MAI PSNR ↑ |
+|:--|--:|--:|--:|--:|--:|--:|
+| PyNet | 21.19 | 0.7471 | 0.8620 | 0.1930 | 22.73 | — |
+| AWNet (RAW) | 21.42 | 0.7478 | 0.8609 | 0.1980 | 23.27 | 23.95 |
+| AWNet (demosaic) | 21.53 | 0.7488 | 0.8614 | 0.2120 | 23.38 | 24.03 |
+| MWISP | 21.42 | 0.7544 | 0.8654 | 0.2130 | 23.07 | 24.24 |
+| MWISP-GAN | 21.16 | 0.7317 | 0.8578 | 0.1580 | 22.80 | 24.34 |
+| LiteISP | 21.55 | 0.7487 | 0.8596 | 0.1870 | 23.76 | 23.11 |
+| LWISP | 21.57 | — | 0.8622 | — | — | — |
+| FourierISP (ours) | 21.65 | 0.7546 | 0.8660 | 0.1820 | 23.93 | 24.99 |
+
+MWISP-GAN has the best unaligned ZRR LPIPS. Dashes indicate missing results. MAI uses one epoch of fine-tuning.
+
+### Ablation (Table 2, ZRR)
+
+| Configuration | PSNR ↑ | SSIM ↑ | MS-SSIM ↑ | LPIPS ↓ |
+|:--|--:|--:|--:|--:|
+| Without phase | 21.47 | 0.7413 | 0.8581 | 0.199 |
+| Without amplitude | 21.37 | 0.7488 | 0.8592 | 0.187 |
+| Color histogram loss | 21.13 | 0.7476 | 0.8581 | 0.193 |
+| FourierISP | 21.65 | 0.7546 | 0.8660 | 0.182 |
 
 ## Quick start — modern PyTorch
 
