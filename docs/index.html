@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f8fa">
+<meta name="description" content="FourierISP: official AAAI 2024 research project and modular PyTorch implementation of Fourier-domain RAW-to-sRGB mapping.">
+<title>FourierISP · AAAI 2024</title>
+<style>
+:root{color-scheme:light;--paper:#f7f8fa;--white:#fff;--ink:#172c3a;--muted:#566b79;--line:#dce4eb;--green:#226453;--blue:#315a91;--amber:#8c5025;--dark:#132c38}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65;font-size:16px}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}a:focus-visible,button:focus-visible{outline:3px solid #5e94b8;outline-offset:4px}header{border-bottom:1px solid var(--line);background:#fff}.nav{max-width:1120px;margin:auto;padding:18px 26px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}.brand{font-weight:760;letter-spacing:-.04em;font-size:22px;color:var(--ink)}nav{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;font-weight:650}nav a{color:var(--muted)}main{max-width:1120px;padding:0 26px 56px;margin:auto}.hero{text-align:center;padding:84px 0 54px}.eyebrow{letter-spacing:.17em;text-transform:uppercase;font-size:12px;font-weight:800;color:var(--green);margin:0 0 14px}.hero h1{font-size:clamp(44px,8vw,88px);letter-spacing:-.075em;line-height:1;margin:0 0 24px;font-weight:800}.hero h2{font-size:clamp(22px,3.4vw,38px);font-weight:650;letter-spacing:-.035em;line-height:1.22;max-width:850px;margin:0 auto 28px}.authors{max-width:860px;margin:0 auto 12px;color:var(--ink);font-size:16px;line-height:1.85}.affiliations{color:var(--muted);font-size:13px;max-width:860px;margin:0 auto 10px}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:28px 0 0}.button{padding:10px 19px;border:1px solid #cbd7df;border-radius:7px;background:var(--white);color:var(--ink);font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:9px}.button.primary{background:var(--dark);border-color:var(--dark);color:white}.button:hover{text-decoration:none;filter:brightness(.96)}.feature{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;margin:0 0 66px}.feature img{display:block;width:100%;height:auto;border-radius:12px}.feature figcaption{padding:12px 15px;color:var(--muted);font-size:13px}.section{padding:48px 0;border-top:1px solid var(--line)}.section h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.045em;line-height:1.15;margin:0 0 18px}.lead{max-width:850px;color:var(--muted);font-size:17px;margin:0 0 24px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px}.stage{background:white;padding:24px;border:1px solid var(--line);border-radius:12px;border-top:4px solid var(--blue)}.stage:nth-child(2){border-top-color:var(--amber)}.stage:nth-child(3){border-top-color:var(--green)}.stage h3{font-size:25px;letter-spacing:-.03em;margin:3px 0}.stage small{font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}.stage p{color:var(--muted);margin:8px 0 0;font-size:15px}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:26px 0}.metric{background:white;border:1px solid var(--line);border-radius:12px;padding:24px}.metric strong{display:block;font-size:clamp(30px,5vw,48px);line-height:1.2;letter-spacing:-.055em;font-variant-numeric:tabular-nums}.metric span{display:block;font-size:13px;color:var(--muted)}.table-wrap{overflow-x:auto;background:white;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;text-align:right;font-size:14px;font-variant-numeric:tabular-nums}th,td{padding:14px 18px;border-bottom:1px solid var(--line);white-space:nowrap}th:first-child,td:first-child{text-align:left}thead{background:#edf2f5}tbody tr:last-child td{border-bottom:0}.note{font-size:13px;color:var(--muted);margin:12px 0 0}.implementation{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}.implementation ul{padding-left:20px;color:var(--muted);margin:10px 0}.implementation li{margin:8px 0}.code-panel{border-radius:12px;background:#132c38;color:#e4edf2;overflow:hidden}.code-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #36505d;color:#bdcdd5;font-size:12px;font-weight:650}.code-bar button{color:#dbe6ea;background:#2b4654;border:1px solid #486370;padding:5px 11px;border-radius:5px;cursor:pointer}pre{margin:0;padding:20px;overflow:auto;font-size:13px;line-height:1.7;tab-size:2}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}.validation{border-left:3px solid var(--green);padding:4px 0 4px 16px;margin-top:24px;color:var(--muted);font-size:14px}.links{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;font-weight:650;margin-top:18px}footer{border-top:1px solid var(--line);padding:24px;text-align:center;font-size:13px;color:var(--muted);background:#fff}@media(max-width:720px){main{padding-inline:18px}.nav{padding-inline:18px;gap:10px}nav{gap:14px}.hero{padding:52px 0 32px}.feature{padding:5px;margin-bottom:36px}.cards,.metrics,.implementation{grid-template-columns:1fr}.metric{padding:18px}.section{padding:34px 0}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="nav"><a class="brand" href="#top">FourierISP</a><nav aria-label="Main navigation"><a href="#method">Method</a><a href="#results">Results</a><a href="#code">Code</a><a href="#citation">Citation</a></nav></div></header>
+<main id="top">
+<section class="hero" aria-labelledby="project-title">
+<p class="eyebrow">AAAI 2024 / Neural image signal processing</p>
+<h1 id="project-title">FourierISP</h1>
+<h2>Enhancing RAW-to-sRGB with Decoupled Style Structure in Fourier Domain</h2>
+<p class="authors"><strong>Xuanhua He<sup>1,2,*</sup></strong>, <strong>Tao Hu<sup>1,2,*</sup></strong>, Guoli Wang<sup>3</sup>, Zejin Wang<sup>3</sup>, Run Wang<sup>3</sup>, Qian Zhang<sup>3</sup>, Keyu Yan<sup>1,2</sup>, Ziyi Chen<sup>4</sup>, Rui Li<sup>1</sup>, Chenjun Xie<sup>1</sup>, Jie Zhang<sup>1,†</sup>, Man Zhou<sup>5,†</sup></p>
+<p class="affiliations"><sup>1</sup> Hefei Institutes of Physical Science, Chinese Academy of Sciences &nbsp; · &nbsp;<sup>2</sup> University of Science and Technology of China &nbsp; · &nbsp;<sup>3</sup> Horizon Robotics &nbsp; · &nbsp;<sup>4</sup> Tencent Technology &nbsp; · &nbsp;<sup>5</sup> Nanyang Technological University</p>
+<p class="affiliations">* Equal contribution &nbsp; · &nbsp; † Corresponding authors</p>
+<div class="actions"><a class="button primary" href="https://arxiv.org/pdf/2401.02161">Read the paper ↗</a><a class="button" href="https://github.com/alexhe101/FourierISP">GitHub ↗</a><a class="button" href="https://doi.org/10.1609/aaai.v38i3.27985">AAAI proceedings ↗</a><a class="button" href="#code">Quick start ↓</a></div>
+</section>
+<figure class="feature"><img src="assets/architecture.svg" alt="Packed Bayer feeds the phase enhancement subnet; demosaiced RAW feeds the amplitude refinement subnet. Both feature streams meet in the color adaptation subnet." width="1000" height="420"><figcaption>Conceptual overview of the original FourierISP architecture. See <a href="https://arxiv.org/html/2401.02161v1#S3">Section 3 of the paper</a> for the detailed network and losses.</figcaption></figure>
+<section class="section" id="method">
+<p class="eyebrow">01 / Method</p><h2>One image. Two spectral objectives.</h2>
+<p class="lead">RAW-to-sRGB processing must recover fine spatial details as well as reproduce color. FourierISP uses the complementary information in Fourier phase and amplitude to specialize these learning objectives before combining the representations in an image reconstruction network.</p>
+<div class="cards"><article class="stage"><small>01 / Structure</small><h3>PES</h3><p>Phase Enhance Subnet extracts detail from packed Bayer input, with phase supervision and spatial-frequency refinement.</p></article><article class="stage"><small>02 / Style</small><h3>ARS</h3><p>Amplitude Refine Subnet estimates color-related information from demosaiced input, using amplitude supervision.</p></article><article class="stage"><small>03 / Integration</small><h3>CAS</h3><p>Color Adaptation Subnet combines structure and color features through multiscale adaptation to reconstruct sRGB.</p></article></div>
+<p class="note">Phase and amplitude are useful complementary priors, not perfectly independent physical quantities.</p>
+</section>
+<section class="section" id="results">
+<p class="eyebrow">02 / Published evaluation</p><h2>Results on ZRR and MAI</h2>
+<p class="lead">Original AAAI 2024 results. The aligned ZRR protocol compensates for ground-truth misalignment; MAI evaluates transfer after one epoch of fine-tuning.</p>
+<div class="metrics"><div class="metric"><span>ZRR · PSNR</span><strong>21.65 <small style="font-size:16px">dB</small></strong><span>Unaligned protocol</span></div><div class="metric"><span>ZRR aligned · PSNR</span><strong>23.93 <small style="font-size:16px">dB</small></strong><span>Aligned ground truth</span></div><div class="metric"><span>MAI · PSNR</span><strong>24.99 <small style="font-size:16px">dB</small></strong><span>One epoch of fine-tuning</span></div></div>
+<div class="table-wrap"><table><thead><tr><th scope="col">Protocol</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">MS-SSIM ↑</th><th scope="col">LPIPS ↓</th></tr></thead><tbody><tr><td>ZRR</td><td>21.65</td><td>0.7546</td><td>0.8660</td><td>0.1820</td></tr><tr><td>ZRR (aligned GT)</td><td>23.93</td><td>0.8744</td><td>0.9461</td><td>0.1240</td></tr><tr><td>MAI</td><td>24.99</td><td>0.8820</td><td>0.9594</td><td>0.0850</td></tr></tbody></table></div>
+<p class="note">Source: <a href="https://arxiv.org/html/2401.02161v1#S4">Table 1, He et al., AAAI 2024</a>. These results have not been remeasured with the modern package.</p>
+<div class="links"><a href="https://arxiv.org/html/2401.02161v1#S4">View qualitative comparisons, feature maps and ablations ↗</a><a href="https://arxiv.org/pdf/2401.02161">Full paper with figures ↗</a></div>
+</section>
+<section class="section" id="code">
+<p class="eyebrow">03 / Open implementation</p><h2>FourierISP Modern</h2>
+<div class="implementation"><div><p class="lead">A standalone PyTorch package that preserves the active computation of the published architecture. The original BasicSR code remains available alongside it.</p><ul><li>Independent phase, amplitude and color-adaptation modules.</li><li>FP32 spectral operations under mixed precision.</li><li>Strict legacy checkpoint migration and typed model outputs.</li><li>Inference and benchmarking CLI, plus a BasicSR training adapter.</li></ul><div class="links"><a href="https://github.com/alexhe101/FourierISP/tree/main/modern">Source code ↗</a><a href="https://github.com/alexhe101/FourierISP/blob/main/modern/README.md">Documentation ↗</a></div></div>
+<div><div class="code-panel"><div class="code-bar"><span>Terminal / Quick start</span><button type="button" data-copy="install-code" aria-label="Copy installation commands">Copy</button></div><pre id="install-code"><code>git clone https://github.com/alexhe101/FourierISP.git
+cd FourierISP
+python -m pip install -e './modern[dev]'
+python -m pytest modern/tests -q -rs</code></pre></div><div class="validation"><strong>Validation:</strong> <a href="https://github.com/alexhe101/FourierISP/actions/runs/45541148605">CPU CI</a> passed on Python 3.10 and 3.12 (14 passed, 1 CUDA skip each). Full trained-model reproduction, GPU performance and end-to-end training remain unverified. No public checkpoint is provided.</div></div></div>
+</section>
+<section class="section" id="citation"><p class="eyebrow">04 / Reference</p><h2>Cite FourierISP</h2><p class="lead">Please cite the original AAAI 2024 paper when using FourierISP.</p><div class="code-panel"><div class="code-bar"><span>BibTeX</span><button type="button" data-copy="bib-code" aria-label="Copy BibTeX citation">Copy</button></div><pre id="bib-code"><code>@inproceedings{he2024fourierisp,
+  title     = {Enhancing RAW-to-sRGB with Decoupled Style Structure in Fourier Domain},
+  author    = {He, Xuanhua and Hu, Tao and Wang, Guoli and Wang, Zejin and
+               Wang, Run and Zhang, Qian and Yan, Keyu and Chen, Ziyi and
+               Li, Rui and Xie, Chengjun and Zhang, Jie and Zhou, Man},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {38},
+  number    = {3},
+  pages     = {2130--2138},
+  year      = {2024},
+  doi       = {10.1609/aaai.v38i3.27985}
+}</code></pre></div></section>
+</main>
+<footer>FourierISP · AAAI 2024 &nbsp; | &nbsp; <a href="https://github.com/alexhe101/FourierISP">GitHub repository</a> &nbsp; | &nbsp; <a href="https://doi.org/10.1609/aaai.v38i3.27985">Publication</a></footer>
+<script>
+document.querySelectorAll("[data-copy]").forEach(function(button){
+  button.addEventListener("click", async function(){
+    var value = document.getElementById(button.dataset.copy).textContent;
+    try {
+      await navigator.clipboard.writeText(value);
+      button.textContent="Copied";
+    } catch(error) {
+      var range=document.createRange();
+      range.selectNodeContents(document.getElementById(button.dataset.copy));
+      var selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);
+      button.textContent="Selected — copy manually";
+    }
+    setTimeout(function(){button.textContent="Copy";},1800);
+  });
+});
+</script>
+</body></html>

@@ -4,7 +4,7 @@ An additive, standalone PyTorch refactor of [FourierISP (AAAI 2024)](https://arx
 
 ## Install
 
-From the original repository after applying the modern branch patch:
+From the repository root:
 
 ```sh
 python -m venv .venv
@@ -90,7 +90,7 @@ Benchmark reports synchronized median model latency and, on CUDA, peak allocated
 
 `pytest` covers shape validation, configurable depth, all active parameter gradients, BF16 CPU autocast, FFT roundtrip including odd sizes, Bayer normalization/channel order, checkpoint conversion, CLI inference and legacy parity. The parity test loads the *untouched upstream* architecture from `basicsr/archs/FourierISP_arch.py`, transfers its active weights, then compares all three outputs and input gradients. When testing the overlay alone, parity tests skip unless `FOURIERISP_LEGACY_ARCH` points to a reference file. CUDA tests skip without a GPU. CI checks the upstream file exists and runs the complete CPU suite after the overlay is applied to the original repository.
 
-Local development validation used a manually transcribed reference from the public upstream code because the Git remote was unavailable. It verified the migration and numerical outputs on synthetic tensors, including the paper's default width. This is not a substitute for CI against the actual upstream file, actual trained checkpoint, full ZRR metrics, GPU latency, or a training run. No quality or performance improvement over the paper is claimed.
+Local development validation used a manually transcribed reference from the public upstream code because the Git remote was unavailable. It verified the migration and numerical outputs on synthetic tensors, including the paper's default width. Subsequent [GitHub Actions CI](https://github.com/alexhe101/FourierISP/actions/runs/45541148605) ran the complete CPU suite against the actual upstream architecture on Python 3.10 and 3.12: 14 tests passed and 1 CUDA test was skipped in each environment. Actual trained checkpoints, full ZRR metrics, GPU latency, and end-to-end training remain unverified. No quality or performance improvement over the paper is claimed.
 
 ## References
 
