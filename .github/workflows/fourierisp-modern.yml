@@ -1,0 +1,23 @@
+name: FourierISP Modern
+on:
+  push:
+    paths: ['modern/**', 'basicsr/archs/FourierISP*_arch.py', '.github/workflows/fourierisp-modern.yml']
+  pull_request:
+    paths: ['modern/**', 'basicsr/archs/FourierISP*_arch.py', '.github/workflows/fourierisp-modern.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -e 'modern[dev]'
+      - run: test -f basicsr/archs/FourierISP_arch.py
+      - run: python -m pytest modern/tests -q -rs

@@ -1,0 +1,53 @@
+# Same published repository defaults, with only the architecture registration changed.
+name: train_FourierISPModern
+model_type: FcolorDualModel
+scale: 1
+num_gpu: 1
+manual_seed: 0
+find_unused_parameters: false
+datasets:
+  train:
+    name: ZRRTrain
+    type: RAWDualImageDataset
+    dataroot_gt: /path/data/Zurich-RAW-to-DSLR-Dataset/train/canon
+    dataroot_lq: /path/data/Zurich-RAW-to-DSLR-Dataset/train/huawei_raw
+    filename_tmpl: '{}'
+    io_backend: {type: disk}
+    use_hflip: true
+    use_rot: true
+    num_worker_per_gpu: 6
+    batch_size_per_gpu: 2
+    dataset_enlarge_ratio: 1
+    prefetch_mode: ~
+  val:
+    name: ZRRTest
+    type: RAWDualImageDataset
+    dataroot_gt: /path/data/Zurich-RAW-to-DSLR-Dataset/test/canon
+    dataroot_lq: /path/data/Zurich-RAW-to-DSLR-Dataset/test/huawei_raw
+    io_backend: {type: disk}
+network_g: {type: FourierISPModern, wf: 24, in_chn: 3, depth: 4, relu_slope: 0.2}
+path:
+  pretrain_network_g: ~
+  resume_state: ~
+train:
+  ema_decay: 0.999
+  optim_g: {type: Adam, lr: 0.0002, weight_decay: 0, betas: [0.9, 0.99]}
+  gclip: -4
+  scheduler: {type: MultiStepLR, milestones: [150000, 250000, 350000, 450000], gamma: 0.5}
+  total_iter: 500000
+  pixel_opt: {type: L1Loss, loss_weight: 1.0, reduction: mean}
+  vgg_opt: {type: VGGLoss, loss_weight: 1.0, reduction: mean}
+  fft_opt: {type: FFTV10Loss, loss_weight: 0.1, reduction: mean}
+  ssim_opt: {type: SSIMLoss, loss_weight: 0.5, reduction: mean}
+val:
+  val_freq: 10000
+  save_img: false
+  metrics:
+    psnr: {type: calculate_psnr, crop_border: 0, test_y_channel: false}
+    ssim: {type: calculate_ssim, crop_border: 0, test_y_channel: false}
+logger:
+  print_freq: 1000
+  save_checkpoint_freq: 10000
+  use_tb_logger: true
+  wandb: {project: ~, resume_id: ~}
+dist_params: {backend: nccl, port: 29500}
