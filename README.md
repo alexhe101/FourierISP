@@ -16,7 +16,7 @@ Xuanhua He\*, Tao Hu\*, Guoli Wang, Zejin Wang, Run Wang, Qian Zhang, Keyu Yan, 
 
 </div>
 
-[![Original ZRR teaser — Figure 1](https://arxiv.org/html/2401.02161v1/x1.png)](https://arxiv.org/pdf/2401.02161v1#page=1)
+[![Original ZRR teaser — Figure 1](docs/assets/paper/figure-1.png)](https://arxiv.org/pdf/2401.02161v1#page=1)
 
 ![FourierISP conceptual architecture](docs/assets/architecture.svg)
 
@@ -43,13 +43,13 @@ The numbers below are from Table 1 of the [AAAI 2024 paper](https://arxiv.org/ht
 
 ### Qualitative comparisons (original paper)
 
-[![ZRR texture comparison — Figure 5](https://arxiv.org/html/2401.02161v1/x5.png)](https://arxiv.org/pdf/2401.02161v1#page=5)
+[![ZRR texture comparison — Figure 5](docs/assets/paper/figure-5.png)](https://arxiv.org/pdf/2401.02161v1#page=5)
 
-[![ZRR colors and histograms — Figure 6](https://arxiv.org/html/2401.02161v1/x6.png)](https://arxiv.org/pdf/2401.02161v1#page=6)
+[![ZRR colors and histograms — Figure 6](docs/assets/paper/figure-6.png)](https://arxiv.org/pdf/2401.02161v1#page=6)
 
-[![Amplitude and phase features — Figure 7](https://arxiv.org/html/2401.02161v1/x7.png)](https://arxiv.org/pdf/2401.02161v1#page=6)
+[![Amplitude and phase features — Figure 7](docs/assets/paper/figure-7.png)](https://arxiv.org/pdf/2401.02161v1#page=6)
 
-[![MAI transfer — Figure 8](https://arxiv.org/html/2401.02161v1/x8.png)](https://arxiv.org/pdf/2401.02161v1#page=7)
+[![MAI transfer — Figure 8](docs/assets/paper/figure-8.png)](https://arxiv.org/pdf/2401.02161v1#page=7)
 
 Source: He et al., AAAI 2024, Figures 1 and 5–8, [paper](https://arxiv.org/pdf/2401.02161v1). These are original published panels, not new outputs from the modern implementation. See the [project website](https://alexhe101.github.io/FourierISP/#results) or the paper for all comparisons.
 
