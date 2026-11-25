@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fourierisp-modern"
+version = "0.1.0"
+description = "Standalone PyTorch refactor of FourierISP (AAAI 2024)"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.4", "numpy>=1.24", "pillow>=10"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.9"]
+raw = ["colour-demosaicing>=0.2.5"]
+
+[project.scripts]
+fourierisp = "fourierisp.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
